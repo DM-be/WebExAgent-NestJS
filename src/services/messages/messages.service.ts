@@ -8,8 +8,11 @@ import { webExWebhookDto } from 'src/models/webExWebhookDto';
 @Injectable()
 export class MessagesService {
 
-    private BASE_URL = "https://api.ciscospark.com/v1/messages/";
-    private BEARER_TOKEN = "MzJiOTg4NWQtMjEwMS00YjdiLWFkYzktZjY5NmU0NDEyNmM1NWM0MGIwNTktNDBj_PF84_consumer";
+    private BASE_URL = "https://api.ciscospark.com/v1/messages";
+    
+    
+    private BEARER_TOKEN = "Nzg2OTE1OTAtNmM3YS00Mjc2LWFiMjgtMGEwYjRlNjU4MDhkYjIwZGJlMzQtY2I0_PF84_consumer";
+    //private BEARER_TOKEN = "MzJiOTg4NWQtMjEwMS00YjdiLWFkYzktZjY5NmU0NDEyNmM1NWM0MGIwNTktNDBj_PF84_consumer";
 
     private AXIOS_REQUEST_CONFIG: AxiosRequestConfig = {
         headers: {

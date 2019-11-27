@@ -7,17 +7,19 @@ import { WebExMessageDetail } from 'src/models/webExMessageDetail';
 export class BirthdayMessageResponderService {
 
 
-    // only send bday once a day
+    // todo: improve, only send once per day etc. 
+
+
+    // randomize counter per day 
+
     private counter: number = 0;
-    private delayTime: number;
-    private messageSent = false;
+
      // delay time to send response again
 
-
-
-    private RESPONSES: string [] = ["Proficiat!", "Gelukkige verjaardag!"]
+    private RESPONSES: string [] = ["Proficiat!", "Gelukkige verjaardag!", "Happy birthday!", "gelukkige verjaardag", "proficiat!"]
     private REGEX = " /gelukkige verjaardag|proficiat|happy birthday|gelukkige verjaardag|happy one/gm;"
-    
+    private COUNTER_RANGE: number; 
+
     // TODO: add from environment (birthdayroomid)
     private ROOM_ID = "Y2lzY29zcGFyazovL3VzL1JPT00vZjAxNWMzZjAtMTBmZC0xMWVhLTk5YWItOTFkZWI1Yzg5NzBl";
 
@@ -27,7 +29,6 @@ export class BirthdayMessageResponderService {
 
     private async sendHappyBirthdayToRoom() {
         try {
-            console.log("sending response")
             const text = this.RESPONSES[Math.floor(Math.random() * this.RESPONSES.length)];
             const webExMessageResponse: WebExMessageResponse = {
                 roomId: this.ROOM_ID,
@@ -43,19 +44,16 @@ export class BirthdayMessageResponderService {
     private async delay(ms: number) {
         await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
     }
-    
-
     // receives the body with text
     public async respondWhenNeeded(webExMessageDetail: WebExMessageDetail) {
         if(this.containsBirthdayString(webExMessageDetail))
         {
             this.counter++;
-            console.log("regexmatched")
         }
-        if(this.counter === 3)
+        if(this.counter === 5)
         {
             try {
-                await this.sendHappyBirthdayToRoom();//
+                await this.sendHappyBirthdayToRoom();
                 this.counter = 0;
             } catch (error) {
                 console.log(error);
@@ -67,4 +65,9 @@ export class BirthdayMessageResponderService {
         let regExp = new RegExp(this.REGEX);
         return regExp.test(webExMessageDetail.text);
     }
+
+    private resetCounterWithinRange() {
+        
+    }
+
 }
