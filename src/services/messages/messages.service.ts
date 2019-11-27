@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { WebExMessageDetail } from 'src/models/webExMessageDetail';
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { WebExMessageResponse } from 'src/models/webExMessageResponse';
+import { webExWebhookDto } from 'src/models/webExWebhookDto';
 
 
 @Injectable()
@@ -15,7 +16,8 @@ export class MessagesService {
           'Authorization': 'Bearer ' + this.BEARER_TOKEN,
         }}
     
-    public async getMessageDetail(messageId: string): Promise<WebExMessageDetail> {
+    public async getMessageDetail(webExWebHookDto: webExWebhookDto): Promise<WebExMessageDetail> {
+        const messageId = webExWebHookDto.data.id;
         const url = `${this.BASE_URL}/${messageId}`;
         try {
             const axiosResponse: AxiosResponse<any> = await Axios.get(url, this.AXIOS_REQUEST_CONFIG );
@@ -31,6 +33,7 @@ export class MessagesService {
         const url = this.BASE_URL;
         try {
             const axiosResponse: AxiosResponse<any> = await Axios.post(url, webExMessageResponse, this.AXIOS_REQUEST_CONFIG);
+            console.log(axiosResponse);
         } catch (error) {
             console.log(error);
         }
