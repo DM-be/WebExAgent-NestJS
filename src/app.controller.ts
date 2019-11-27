@@ -1,15 +1,14 @@
-import { Controller, Get, Post, Body, Redirect } from '@nestjs/common';
+import { Controller, Get, Post, Body, Redirect,  Res, Render} from '@nestjs/common';
 import { AppService } from './app.service';
-import { get } from 'http';
+
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Redirect('https://nestjs.com', 301)
-  getHello(@Body() body) {
-    console.log(body)
-   // return this.appService.getHello();
+  @Render('index')
+  root() {
+    return { message: 'Hello !' };
   }
 }
