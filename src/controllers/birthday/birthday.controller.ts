@@ -18,10 +18,6 @@ export class BirthdayController {
         } catch (error) {
             console.log(error)
         }
-        
-     
-
-
     }
 }
 
