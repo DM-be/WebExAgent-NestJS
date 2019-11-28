@@ -17,11 +17,6 @@ export class AuthenticationService {
     private REFRESH_TOKEN: string; 
     
 
-
-
-
-
-
     public async createInitialToken(code: string) {
 
         try {
@@ -41,10 +36,6 @@ export class AuthenticationService {
         } catch (error) {
             console.log(error);
         }
-
-    
-
-        
 
     }
 

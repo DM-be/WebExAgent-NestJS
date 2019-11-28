@@ -6,19 +6,10 @@ import { WebExMessageDetail } from 'src/models/webExMessageDetail';
 @Injectable()
 export class BirthdayMessageResponderService {
 
-
-    // todo: improve, only send once per day etc. 
-
-
-    // randomize counter per day 
-
     private counter: number = 0;
-
-     // delay time to send response again
-
     private RESPONSES: string [] = ["Proficiat!", "Gelukkige verjaardag!", "Happy birthday!", "gelukkige verjaardag", "proficiat!"]
-    private REGEX = " /gelukkige verjaardag|proficiat|happy birthday|gelukkige verjaardag|happy one/gm;"
-    private COUNTER_RANGE: number; 
+    private REGEX = ` /gelukkige verjaardag|proficiat|happy birthday|gelukkige verjaardag|happy one/gm`;
+
 
     // TODO: add from environment (birthdayroomid)
     private ROOM_ID = "Y2lzY29zcGFyazovL3VzL1JPT00vZjAxNWMzZjAtMTBmZC0xMWVhLTk5YWItOTFkZWI1Yzg5NzBl";
@@ -41,13 +32,11 @@ export class BirthdayMessageResponderService {
         }
     }
 
-    private async delay(ms: number) {
-        await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
-    }
-    // receives the body with text
     public async respondWhenNeeded(webExMessageDetail: WebExMessageDetail) {
+        console.log(`${webExMessageDetail.text} and match: ${this.containsBirthdayString(webExMessageDetail)}`)
         if(this.containsBirthdayString(webExMessageDetail))
         {
+            
             this.counter++;
         }
         if(this.counter === 5)
@@ -63,11 +52,9 @@ export class BirthdayMessageResponderService {
 
     private containsBirthdayString(webExMessageDetail: WebExMessageDetail): boolean {
         let regExp = new RegExp(this.REGEX);
+        console.log(webExMessageDetail.text)
         return regExp.test(webExMessageDetail.text);
-    }
 
-    private resetCounterWithinRange() {
-        
     }
 
 }
