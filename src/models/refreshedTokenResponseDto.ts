@@ -1,5 +1,5 @@
 export interface RefreshedTokenResponseDto {
-    acces_token: string,
+    access_token: string,
     expires_in: string // seconds
     refresh_token: string,
     refresh_token_expires_in: string, 
