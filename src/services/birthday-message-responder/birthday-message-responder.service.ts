@@ -54,7 +54,6 @@ export class BirthdayMessageResponderService {
         let regExp = new RegExp(this.REGEX);
         console.log(webExMessageDetail.text)
         return regExp.test(webExMessageDetail.text);
-
     }
 
 }
